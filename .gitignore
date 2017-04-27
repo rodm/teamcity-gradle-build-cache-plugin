@@ -1,0 +1,19 @@
+
+# Gradle
+.gradle/
+build/
+gradle.properties
+
+# gradle-teamcity-plugin
+data/
+downloads/
+servers/
+
+# IDEA
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# macOS
+.DS_Store

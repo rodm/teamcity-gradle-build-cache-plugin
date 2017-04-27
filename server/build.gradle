@@ -1,0 +1,46 @@
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'com.github.rodm.teamcity-server'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile group: 'com.hazelcast', name: 'hazelcast', version: '3.8'
+
+    testCompile localGroovy()
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
+}
+
+teamcity {
+    server {
+        archiveName = "gradle-build-cache-${rootProject.version}.zip"
+
+        descriptor {
+            name = 'gradleBuildCache'
+            displayName = 'Gradle Build Cache'
+            version = rootProject.version
+            description = 'TeamCity plugin to enable the server to act as a remote Gradle Build Cache'
+            vendorName = 'Rod MacKenzie'
+            vendorUrl = 'https://github.com/rodm'
+            email = 'rod.n.mackenzie@gmail.com'
+            downloadUrl = 'https://github.com/rodm/teamcity-gradle-build-cache-plugin'
+            useSeparateClassloader = true
+        }
+    }
+
+    environments {
+        downloadsDir = project.downloadsDir
+        baseHomeDir = project.serversDir
+        baseDataDir = "${rootDir}/data"
+
+        teamcity10 {
+            version = '10.0.5'
+            javaHome = file(java8Home)
+            serverOptions '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
+            agentOptions '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006'
+        }
+    }
+}
