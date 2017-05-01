@@ -1,4 +1,5 @@
 
 rootProject.name = 'teamcity-gradle-build-cache'
 
+include 'agent'
 include 'server'

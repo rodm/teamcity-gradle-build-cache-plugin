@@ -1,0 +1,22 @@
+
+initscript {
+    repositories {
+        maven {
+            url 'https://repo.gradle.org/gradle/libs/'
+        }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.gradle.caching.hazelcast:gradle-hazelcast-plugin:0.9'
+    }
+}
+
+gradle.settingsEvaluated { settings ->
+    settings.apply(plugin: org.gradle.caching.hazelcast.HazelcastPlugin)
+    settings.buildCache {
+        local(org.gradle.caching.hazelcast.HazelcastBuildCache) {
+            push = true
+        }
+    }
+}

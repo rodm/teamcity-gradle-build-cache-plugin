@@ -1,0 +1,33 @@
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'com.github.rodm.teamcity-agent'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    testCompile localGroovy()
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
+}
+
+teamcity {
+    version = '10.0'
+
+    agent {
+        archiveName = "gradle-build-cache.zip"
+
+        descriptor {
+            pluginDeployment {
+                useSeparateClassloader = true
+            }
+        }
+
+        files {
+            into('scripts') {
+                from('scripts')
+            }
+        }
+    }
+}
