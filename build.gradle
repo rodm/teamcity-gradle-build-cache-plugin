@@ -33,8 +33,8 @@ bintray {
 
     pkg {
         repo = 'teamcity-plugins-generic'
-        name = 'teamcity-gradle-build-cache-plugin'
-        desc = 'Provides support for using the Gradle Build Cache'
+        name = 'gradle-build-cache'
+        desc = 'A TeamCity plugin that provides a build feature to enable the Gradle Build Cache'
         websiteUrl = 'https://github.com/rodm/teamcity-gradle-build-cache-plugin'
         issueTrackerUrl = 'https://github.com/rodm/teamcity-gradle-build-cache-plugin/issues'
         vcsUrl = 'https://github.com/rodm/teamcity-gradle-build-cache-plugin.git'
