@@ -1,6 +1,7 @@
 
 plugins {
     id 'com.github.rodm.teamcity-server' version '1.0' apply true
+    id 'com.jfrog.bintray' version '1.7.3'
 }
 
 group = 'com.github.rodm'
@@ -14,4 +15,34 @@ ext {
 
 teamcity {
     version = '10.0'
+}
+
+bintray {
+    user = findProperty('bintray.user')
+    key = findProperty('bintray.key')
+
+    filesSpec {
+        from "${project(':server').buildDir}/distributions"
+        into 'gradle-build-cache'
+        include '*.zip'
+    }
+
+    dryRun = false
+    publish = true
+    override = false
+
+    pkg {
+        repo = 'teamcity-plugins-generic'
+        name = 'teamcity-gradle-build-cache-plugin'
+        desc = 'Provides support for using the Gradle Build Cache'
+        websiteUrl = 'https://github.com/rodm/teamcity-gradle-build-cache-plugin'
+        issueTrackerUrl = 'https://github.com/rodm/teamcity-gradle-build-cache-plugin/issues'
+        vcsUrl = 'https://github.com/rodm/teamcity-gradle-build-cache-plugin.git'
+        licenses = ['Apache-2.0']
+        labels = ['teamcity', 'plugin', 'gradle', 'build-cache']
+
+        version {
+            name = project.version
+        }
+    }
 }
