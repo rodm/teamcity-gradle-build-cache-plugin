@@ -1,6 +1,7 @@
 
 apply plugin: 'java'
 apply plugin: 'groovy'
+apply plugin: 'org.gradle.jacoco'
 apply plugin: 'com.github.rodm.teamcity-agent'
 
 sourceCompatibility = 1.8
