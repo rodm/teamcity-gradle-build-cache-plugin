@@ -12,11 +12,18 @@ initscript {
     }
 }
 
-gradle.settingsEvaluated { settings ->
-    settings.apply(plugin: org.gradle.caching.hazelcast.HazelcastPlugin)
-    settings.buildCache {
-        local(org.gradle.caching.hazelcast.HazelcastBuildCache) {
-            push = true
+if (GradleVersion.current() >= GradleVersion.version("3.5")) {
+    gradle.settingsEvaluated { settings ->
+        def pluginClass = Class.forName('org.gradle.caching.hazelcast.HazelcastPlugin')
+        def cacheClass = Class.forName('org.gradle.caching.hazelcast.HazelcastBuildCache')
+        settings.apply(plugin: pluginClass)
+        settings.buildCache {
+            local(cacheClass) {
+                push = true
+            }
         }
     }
+} else {
+    def message = "Gradle Build Cache is disabled. This feature requires Gradle 3.5 or later, current version is ${GradleVersion.current()}."
+    logger.lifecycle("##teamcity[message text='${message}' status='WARNING']")
 }
