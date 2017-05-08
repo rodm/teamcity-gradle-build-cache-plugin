@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.github.rodm'
-version = '0.2-SNAPSHOT'
+version = '0.2'
 
 ext {
     downloadsDir = project.findProperty('downloads.dir') ?: "$rootDir/downloads"
