@@ -49,6 +49,10 @@ If successful the build log should contain lines similar to the following:
 [12:51:46][Step 1/1] Process exited with code 0
 ----
 
+## Compatibility
+
+The plugin is compatibile with TeamCity 10.0 and later.
+
 ## License
 
 This plugin is available under the http://www.apache.org/licenses/LICENSE-2.0.html[Apache License, Version 2.0].
