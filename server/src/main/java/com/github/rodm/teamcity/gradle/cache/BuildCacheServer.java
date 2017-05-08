@@ -28,7 +28,7 @@ import java.util.logging.Level;
 
 public class BuildCacheServer extends BuildServerAdapter {
 
-    private static final String INSTANCE_NAME = "TeamCityGradleBuildCache";
+    static final String INSTANCE_NAME = "TeamCityGradleBuildCache";
 
     private static final Logger LOGGER = Logger.getLogger("jetbrains.buildServer.SERVER");
 

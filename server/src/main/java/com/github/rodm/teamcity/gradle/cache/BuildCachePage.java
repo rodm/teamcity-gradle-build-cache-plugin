@@ -28,13 +28,16 @@ import org.jetbrains.annotations.NotNull;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-public class BuildCachePage extends AdminPage {
+import static com.github.rodm.teamcity.gradle.cache.BuildCacheServer.INSTANCE_NAME;
+import static com.github.rodm.teamcity.gradle.cache.GradleBuildCachePlugin.PLUGIN_NAME;
 
-    private static final String PLUGIN_NAME = "gradleBuildCache";
+public class BuildCachePage extends AdminPage {
 
     private static final String INCLUDE_URL = "buildCache.jsp";
 
     private static final String TITLE = "Gradle Build Cache";
+
+    private static final String TASK_CACHE_NAME = "gradle-task-cache";
 
     public BuildCachePage(PagePlaces pagePlaces) {
         super(pagePlaces);
@@ -51,9 +54,9 @@ public class BuildCachePage extends AdminPage {
     }
 
     public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
-        HazelcastInstance instance = Hazelcast.getHazelcastInstanceByName("TeamCityGradleBuildCache");
+        HazelcastInstance instance = Hazelcast.getHazelcastInstanceByName(INSTANCE_NAME);
         if (instance != null) {
-            IMap<String, byte[]> taskCache = instance.getMap("gradle-task-cache");
+            IMap<String, byte[]> taskCache = instance.getMap(TASK_CACHE_NAME);
             LocalMapStats statistics = taskCache.getLocalMapStats();
             model.put("statistics", statistics);
         }

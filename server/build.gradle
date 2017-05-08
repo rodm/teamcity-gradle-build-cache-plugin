@@ -8,9 +8,10 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    agent (project(path: ':agent', configuration: 'plugin'))
-
+    compile project(':common')
     compile group: 'com.hazelcast', name: 'hazelcast', version: '3.8'
+
+    agent (project(path: ':agent', configuration: 'plugin'))
 
     testCompile localGroovy()
     testCompile group: 'junit', name: 'junit', version: '4.12'

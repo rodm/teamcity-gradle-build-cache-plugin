@@ -22,6 +22,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
+import static com.github.rodm.teamcity.gradle.cache.GradleBuildCachePlugin.FEATURE_TYPE;
+
 public class BuildCacheFeature extends BuildFeature {
 
     private PluginDescriptor descriptor;
@@ -33,7 +35,7 @@ public class BuildCacheFeature extends BuildFeature {
     @NotNull
     @Override
     public String getType() {
-        return "gradle-build-cache";
+        return FEATURE_TYPE;
     }
 
     @NotNull

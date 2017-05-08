@@ -29,13 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.github.rodm.teamcity.gradle.cache.GradleBuildCachePlugin.FEATURE_TYPE;
 import static jetbrains.buildServer.log.Loggers.AGENT_CATEGORY;
 
 public class GradleBuildCacheFeature extends AgentLifeCycleAdapter {
 
     private static Logger LOG = Logger.getLogger(AGENT_CATEGORY + ".GradleBuildCache");
-
-    private static final String FEATURE_TYPE = "gradle-build-cache";
 
     private static final String GRADLE_CMD_PARAMS = "ui.gradleRunner.additional.gradle.cmd.params";
 
