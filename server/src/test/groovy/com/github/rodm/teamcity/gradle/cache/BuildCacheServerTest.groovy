@@ -27,6 +27,7 @@ import org.junit.Test
 import static org.hamcrest.MatcherAssert.assertThat
 import static org.hamcrest.Matchers.hasSize
 import static org.hamcrest.Matchers.is
+import static org.junit.Assert.assertNotNull
 import static org.mockito.Mockito.eq
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.verify
@@ -78,5 +79,12 @@ class BuildCacheServerTest {
 
         Set<HazelcastInstance> hazelcastInstances = Hazelcast.getAllHazelcastInstances()
         assertThat(hazelcastInstances, hasSize(0))
+    }
+
+    @Test
+    void 'should name the hazelcast instance'() {
+        cacheServer.serverStartup()
+
+        assertNotNull(Hazelcast.getHazelcastInstanceByName('TeamCityGradleBuildCache'))
     }
 }

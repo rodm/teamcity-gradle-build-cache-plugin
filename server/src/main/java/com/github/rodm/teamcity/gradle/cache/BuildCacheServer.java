@@ -28,6 +28,8 @@ import java.util.logging.Level;
 
 public class BuildCacheServer extends BuildServerAdapter {
 
+    private static final String INSTANCE_NAME = "TeamCityGradleBuildCache";
+
     private static final Logger LOGGER = Logger.getLogger("jetbrains.buildServer.SERVER");
 
     private HazelcastInstance hazelcastInstance;
@@ -41,6 +43,7 @@ public class BuildCacheServer extends BuildServerAdapter {
         LOGGER.info(getClass().getSimpleName() + " started");
         java.util.logging.Logger.getLogger("com.hazelcast").setLevel(Level.WARNING);
         Config config = new Config();
+        config.setInstanceName(INSTANCE_NAME);
         config.getNetworkConfig()
                 .setPort(5701)
                 .getJoin()
