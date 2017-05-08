@@ -7,4 +7,5 @@
 
     <bean class="com.github.rodm.teamcity.gradle.cache.BuildCacheServer"/>
     <bean class="com.github.rodm.teamcity.gradle.cache.BuildCacheFeature"/>
+    <bean class="com.github.rodm.teamcity.gradle.cache.BuildCachePage" init-method="register"/>
 </beans>
