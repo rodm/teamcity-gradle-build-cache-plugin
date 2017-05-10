@@ -19,6 +19,7 @@ package com.github.rodm.teamcity.gradle.cache;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IMap;
 import jetbrains.buildServer.serverSide.BuildServerAdapter;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import org.apache.log4j.Logger;
@@ -56,5 +57,10 @@ public class BuildCacheServer extends BuildServerAdapter {
     public void serverShutdown() {
         hazelcastInstance.shutdown();
         LOGGER.info(getClass().getSimpleName() + " stopped");
+    }
+
+    public void clear() {
+        IMap<String, byte[]> taskCache = hazelcastInstance.getMap("gradle-task-cache");
+        taskCache.clear();
     }
 }

@@ -21,6 +21,7 @@ import jetbrains.buildServer.serverSide.SBuildServer
 import jetbrains.buildServer.web.openapi.PagePlace
 import jetbrains.buildServer.web.openapi.PagePlaces
 import jetbrains.buildServer.web.openapi.PlaceId
+import jetbrains.buildServer.web.openapi.PluginDescriptor
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -31,6 +32,7 @@ import static org.hamcrest.MatcherAssert.assertThat
 import static org.hamcrest.Matchers.equalTo
 import static org.hamcrest.Matchers.hasKey
 import static org.hamcrest.Matchers.not
+import static org.mockito.ArgumentMatchers.eq
 import static org.mockito.Mockito.any
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.when
@@ -43,7 +45,9 @@ class BuildCachePageTest {
     void setup() {
         PagePlaces pagePlaces = mock(PagePlaces)
         when(pagePlaces.getPlaceById(any(PlaceId))).thenReturn(mock(PagePlace))
-        page = new BuildCachePage(pagePlaces)
+        PluginDescriptor descriptor = mock(PluginDescriptor)
+        when(descriptor.getPluginResourcesPath(eq('buildCache.js'))).thenReturn('pluginResourcesPath/buildCache.js')
+        page = new BuildCachePage(pagePlaces, descriptor)
     }
 
     @After

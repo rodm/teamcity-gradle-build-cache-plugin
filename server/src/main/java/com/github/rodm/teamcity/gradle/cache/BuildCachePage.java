@@ -22,6 +22,7 @@ import com.hazelcast.core.IMap;
 import com.hazelcast.monitor.LocalMapStats;
 import jetbrains.buildServer.controllers.admin.AdminPage;
 import jetbrains.buildServer.web.openapi.PagePlaces;
+import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import jetbrains.buildServer.web.openapi.PositionConstraint;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,12 +40,13 @@ public class BuildCachePage extends AdminPage {
 
     private static final String TASK_CACHE_NAME = "gradle-task-cache";
 
-    public BuildCachePage(PagePlaces pagePlaces) {
+    public BuildCachePage(PagePlaces pagePlaces, PluginDescriptor descriptor) {
         super(pagePlaces);
         setPluginName(PLUGIN_NAME);
         setIncludeUrl(INCLUDE_URL);
         setTabTitle(TITLE);
         setPosition(PositionConstraint.last());
+        addJsFile(descriptor.getPluginResourcesPath("buildCache.js"));
     }
 
     @NotNull

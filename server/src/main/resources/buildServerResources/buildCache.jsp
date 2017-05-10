@@ -58,4 +58,5 @@
             <td><fmt:formatDate value="${creationTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
         </tr>
     </table>
+    <input type="button" class="btn btn_mini" id="clearCache" onclick="return BS.GradleBuildCache.clearCache();" value="Clear"/>
 </div>
