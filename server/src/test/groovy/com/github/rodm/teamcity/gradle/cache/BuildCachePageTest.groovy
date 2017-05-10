@@ -17,7 +17,6 @@
 package com.github.rodm.teamcity.gradle.cache
 
 import com.hazelcast.core.Hazelcast
-import jetbrains.buildServer.serverSide.SBuildServer
 import jetbrains.buildServer.web.openapi.PagePlace
 import jetbrains.buildServer.web.openapi.PagePlaces
 import jetbrains.buildServer.web.openapi.PlaceId
@@ -64,9 +63,8 @@ class BuildCachePageTest {
 
     @Test
     void 'page fills model with cache statistics'() {
-        SBuildServer server = mock(SBuildServer)
-        BuildCacheServer cacheServer = new BuildCacheServer(server)
-        cacheServer.serverStartup()
+        BuildCacheServer cacheServer = new BuildCacheServer()
+        cacheServer.start()
         HttpServletRequest request = mock(HttpServletRequest)
         Map<String, Object> model = [:]
 

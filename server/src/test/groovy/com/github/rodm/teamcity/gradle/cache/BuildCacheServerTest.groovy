@@ -19,7 +19,6 @@ package com.github.rodm.teamcity.gradle.cache
 import com.hazelcast.core.Hazelcast
 import com.hazelcast.core.HazelcastInstance
 import com.hazelcast.core.LifecycleService
-import jetbrains.buildServer.serverSide.SBuildServer
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -28,20 +27,14 @@ import static org.hamcrest.MatcherAssert.assertThat
 import static org.hamcrest.Matchers.hasSize
 import static org.hamcrest.Matchers.is
 import static org.junit.Assert.assertNotNull
-import static org.mockito.Mockito.eq
-import static org.mockito.Mockito.mock
-import static org.mockito.Mockito.verify
 
 class BuildCacheServerTest {
-
-    private SBuildServer server
 
     private BuildCacheServer cacheServer
 
     @Before
     void setup() {
-        server = mock(SBuildServer)
-        cacheServer = new BuildCacheServer(server)
+        cacheServer = new BuildCacheServer()
     }
 
     @After
@@ -50,12 +43,7 @@ class BuildCacheServerTest {
     }
 
     @Test
-    void 'should register as a build server listener'() {
-        verify(server).addListener(eq(cacheServer))
-    }
-
-    @Test
-    void 'should not start hazelcast instance on creation'() {
+    void 'should not start hazelcast instance before start'() {
         Set<HazelcastInstance> hazelcastInstances = Hazelcast.getAllHazelcastInstances()
 
         assertThat(hazelcastInstances, hasSize(0))
@@ -63,7 +51,7 @@ class BuildCacheServerTest {
 
     @Test
     void 'should start hazelcast instance after server has started'() {
-        cacheServer.serverStartup()
+        cacheServer.start()
 
         Set<HazelcastInstance> hazelcastInstances = Hazelcast.getAllHazelcastInstances()
         assertThat(hazelcastInstances, hasSize(1))
@@ -73,9 +61,9 @@ class BuildCacheServerTest {
 
     @Test
     void 'should stop hazelcast instance before server is shutdown'() {
-        cacheServer.serverStartup()
+        cacheServer.start()
 
-        cacheServer.serverShutdown()
+        cacheServer.stop()
 
         Set<HazelcastInstance> hazelcastInstances = Hazelcast.getAllHazelcastInstances()
         assertThat(hazelcastInstances, hasSize(0))
@@ -83,7 +71,7 @@ class BuildCacheServerTest {
 
     @Test
     void 'should name the hazelcast instance'() {
-        cacheServer.serverStartup()
+        cacheServer.start()
 
         assertNotNull(Hazelcast.getHazelcastInstanceByName('TeamCityGradleBuildCache'))
     }

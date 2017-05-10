@@ -20,14 +20,11 @@ import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
-import jetbrains.buildServer.serverSide.BuildServerAdapter;
-import jetbrains.buildServer.serverSide.SBuildServer;
 import org.apache.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.logging.Level;
 
-public class BuildCacheServer extends BuildServerAdapter {
+public class BuildCacheServer {
 
     static final String INSTANCE_NAME = "TeamCityGradleBuildCache";
 
@@ -35,12 +32,10 @@ public class BuildCacheServer extends BuildServerAdapter {
 
     private HazelcastInstance hazelcastInstance;
 
-    public BuildCacheServer(@NotNull SBuildServer server) {
-        server.addListener(this);
+    public BuildCacheServer() {
     }
 
-    @Override
-    public void serverStartup() {
+    void start() {
         LOGGER.info(getClass().getSimpleName() + " started");
         java.util.logging.Logger.getLogger("com.hazelcast").setLevel(Level.WARNING);
         Config config = new Config();
@@ -53,8 +48,7 @@ public class BuildCacheServer extends BuildServerAdapter {
         hazelcastInstance = Hazelcast.newHazelcastInstance(config);
     }
 
-    @Override
-    public void serverShutdown() {
+    void stop() {
         hazelcastInstance.shutdown();
         LOGGER.info(getClass().getSimpleName() + " stopped");
     }

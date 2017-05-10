@@ -6,6 +6,7 @@
        default-autowire="constructor">
 
     <bean class="com.github.rodm.teamcity.gradle.cache.BuildCacheServer"/>
+    <bean class="com.github.rodm.teamcity.gradle.cache.BuildCacheAdapter"/>
     <bean class="com.github.rodm.teamcity.gradle.cache.BuildCacheFeature"/>
     <bean class="com.github.rodm.teamcity.gradle.cache.BuildCachePage"/>
     <bean class="com.github.rodm.teamcity.gradle.cache.BuildCacheController"/>
