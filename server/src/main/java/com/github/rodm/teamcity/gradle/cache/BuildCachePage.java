@@ -47,6 +47,7 @@ public class BuildCachePage extends AdminPage {
         setTabTitle(TITLE);
         setPosition(PositionConstraint.last());
         addJsFile(descriptor.getPluginResourcesPath("buildCache.js"));
+        register();
     }
 
     @NotNull
