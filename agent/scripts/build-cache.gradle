@@ -1,4 +1,43 @@
 
+import org.gradle.api.internal.tasks.TaskExecutionOutcome
+import org.gradle.api.internal.tasks.TaskStateInternal
+
+class TaskExecutionStatisticsPublisher extends BuildAdapter implements TaskExecutionListener {
+
+    private final Logger logger
+    private final Map<TaskExecutionOutcome, Integer> taskCounts = [:]
+    private final Map<TaskExecutionOutcome, String> statisticsKey = [:]
+
+    TaskExecutionStatisticsPublisher(Logger logger) {
+        this.logger = logger
+        TaskExecutionOutcome.values().each { outcome ->
+            taskCounts.put(outcome, new Integer(0))
+        }
+        statisticsKey.put(TaskExecutionOutcome.EXECUTED, 'GradleTasksExecuted')
+        statisticsKey.put(TaskExecutionOutcome.FROM_CACHE, 'GradleTasksFromCache')
+        statisticsKey.put(TaskExecutionOutcome.NO_SOURCE, 'GradleTasksNoSource')
+        statisticsKey.put(TaskExecutionOutcome.SKIPPED, 'GradleTasksSkipped')
+        statisticsKey.put(TaskExecutionOutcome.UP_TO_DATE, 'GradleTasksUpToDate')
+    }
+
+    @Override
+    void buildFinished(BuildResult result) {
+        taskCounts.each { key, value ->
+            logger.lifecycle("##teamcity[buildStatisticValue key='${statisticsKey.get(key)}' value='${value}']")
+        }
+    }
+
+    @Override
+    void beforeExecute(Task task) {}
+
+    @Override
+    void afterExecute(Task task, TaskState state) {
+        TaskStateInternal stateInternal = (TaskStateInternal) state
+        TaskExecutionOutcome outcome = stateInternal.getOutcome()
+        taskCounts.put(outcome, taskCounts.get(outcome) + 1)
+    }
+}
+
 initscript {
     repositories {
         maven {
@@ -13,6 +52,7 @@ initscript {
 }
 
 if (GradleVersion.current() >= GradleVersion.version("3.5")) {
+    gradle.addListener(new TaskExecutionStatisticsPublisher(logger))
     gradle.settingsEvaluated { settings ->
         def pluginClass = Class.forName('org.gradle.caching.hazelcast.HazelcastPlugin')
         def cacheClass = Class.forName('org.gradle.caching.hazelcast.HazelcastBuildCache')
