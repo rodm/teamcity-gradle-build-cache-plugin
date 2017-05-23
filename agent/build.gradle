@@ -16,8 +16,6 @@ dependencies {
 }
 
 teamcity {
-    version = '10.0'
-
     agent {
         archiveName = "gradle-build-cache.zip"
 
