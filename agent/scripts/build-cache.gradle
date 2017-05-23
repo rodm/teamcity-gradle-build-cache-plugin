@@ -25,6 +25,7 @@ class TaskExecutionStatisticsPublisher extends BuildAdapter implements TaskExecu
         taskCounts.each { key, value ->
             logger.lifecycle("##teamcity[buildStatisticValue key='${statisticsKey.get(key)}' value='${value}']")
         }
+        logger.lifecycle("##teamcity[buildStatisticValue key='GradleTasksTotal' value='${taskCounts.values().sum()}']")
     }
 
     @Override

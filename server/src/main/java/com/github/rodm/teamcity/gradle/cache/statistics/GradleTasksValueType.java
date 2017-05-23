@@ -32,6 +32,7 @@ public class GradleTasksValueType extends CompositeVTB {
     private static Map<String, String> taskOutcomes = new LinkedHashMap<>();
 
     static {
+        taskOutcomes.put("GradleTasksTotal", "Total");
         taskOutcomes.put("GradleTasksExecuted", "Executed");
         taskOutcomes.put("GradleTasksFromCache", "From Cache");
         taskOutcomes.put("GradleTasksNoSource", "No Source");
