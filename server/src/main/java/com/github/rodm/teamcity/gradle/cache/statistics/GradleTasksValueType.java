@@ -17,10 +17,12 @@
 package com.github.rodm.teamcity.gradle.cache.statistics;
 
 import jetbrains.buildServer.serverSide.SBuildServer;
+import jetbrains.buildServer.serverSide.statistics.BuildValueProvider;
 import jetbrains.buildServer.serverSide.statistics.ChartSettings;
 import jetbrains.buildServer.serverSide.statistics.ValueProviderRegistry;
 import jetbrains.buildServer.serverSide.statistics.build.BuildDataStorage;
 import jetbrains.buildServer.serverSide.statistics.build.CompositeVTB;
+import jetbrains.buildServer.serverSide.statistics.build.SimpleBuildMetricVT;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
@@ -63,6 +65,25 @@ public class GradleTasksValueType extends CompositeVTB {
 
     @Override
     public String getSeriesGenericName() {
-        return "Task outcome";
+        return "Task group";
+    }
+
+    @Override
+    protected BuildValueProvider createValueProviderForSubkey(String subKey) {
+        switch (subKey) {
+            case "GradleTasksTotal":
+                return new SimpleBuildMetricVT(myServer, myStorage, myValueProviderRegistry, subKey, "Total tasks");
+            case "GradleTasksExecuted":
+                return new SimpleBuildMetricVT(myServer, myStorage, myValueProviderRegistry, subKey, "Executed tasks");
+            case "GradleTasksFromCache":
+                return new SimpleBuildMetricVT(myServer, myStorage, myValueProviderRegistry, subKey, "From cache tasks");
+            case "GradleTasksNoSource":
+                return new SimpleBuildMetricVT(myServer, myStorage, myValueProviderRegistry, subKey, "No source tasks");
+            case "GradleTasksSkipped":
+                return new SimpleBuildMetricVT(myServer, myStorage, myValueProviderRegistry, subKey, "Skipped tasks");
+            case "GradleTasksUpToDate":
+                return new SimpleBuildMetricVT(myServer, myStorage, myValueProviderRegistry, subKey, "Up to date tasks");
+        }
+        return super.createValueProviderForSubkey(subKey);
     }
 }
