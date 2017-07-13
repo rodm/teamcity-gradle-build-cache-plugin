@@ -12,6 +12,14 @@ and starts a Hazelcast node on the TeamCity Server.
 image:https://travis-ci.org/rodm/teamcity-gradle-build-cache-plugin.svg?branch=master["Build Status", link="https://travis-ci.org/rodm/teamcity-gradle-build-cache-plugin"]
 image:https://api.bintray.com/packages/rodm/teamcity-plugins-generic/gradle-build-cache/images/download.svg[link="https://bintray.com/rodm/teamcity-plugins-generic/gradle-build-cache/_latestVersion"]
 
+## Features
+
+* Configures the TeamCity Server to run as a Build Cache host using Hazelcast
+
+* Enables the Gradle Build Cache on a build configuration by adding a Build Feature
+
+* Collects Gradle task outcomes and provides a graph on the statistics page
+
 ## Installation
 
 * Download the plugin file from {uri-download} (see _Downloads_ section at the bottom of the page).
@@ -51,7 +59,7 @@ If successful the build log should contain lines similar to the following:
 
 ## Compatibility
 
-The plugin is compatibile with TeamCity 10.0 and later.
+The plugin is compatible with TeamCity 10.0 and later.
 
 ## License
 
