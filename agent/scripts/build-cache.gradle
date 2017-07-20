@@ -40,7 +40,7 @@ class TaskExecutionStatisticsPublisher extends BuildAdapter implements TaskExecu
 }
 
 initscript {
-    ext.hazelcastPluginVersion = GradleVersion.current() >= GradleVersion.version('4.0') ? '0.10' : '0.9'
+    ext.hazelcastPluginVersion = GradleVersion.current() >= GradleVersion.version('4.0-milestone-2') ? '0.10' : '0.9'
     logger.info("Applying Hazelcast plugin version: ${hazelcastPluginVersion}")
 
     repositories {
