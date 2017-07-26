@@ -7,6 +7,10 @@ apply plugin: 'com.github.rodm.teamcity-server'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+configurations {
+    all*.exclude module: 'xom'
+}
+
 dependencies {
     compile project(':common')
     compile group: 'com.hazelcast', name: 'hazelcast', version: '3.8'
