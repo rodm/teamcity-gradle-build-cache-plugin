@@ -40,7 +40,10 @@ class TaskExecutionStatisticsPublisher extends BuildAdapter implements TaskExecu
 }
 
 initscript {
-    ext.hazelcastPluginVersion = GradleVersion.current() >= GradleVersion.version('4.0-milestone-2') ? '0.11' : '0.9'
+    ext.hazelcastPluginVersion = System.properties['teamcity.build.cache.plugin.version']
+    if (ext.hazelcastPluginVersion == null) {
+        ext.hazelcastPluginVersion = GradleVersion.current() >= GradleVersion.version('4.0-milestone-2') ? '0.11' : '0.9'
+    }
     logger.info("Applying Hazelcast plugin version: ${hazelcastPluginVersion}")
 
     repositories {
