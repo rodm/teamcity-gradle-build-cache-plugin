@@ -35,6 +35,11 @@ click on the link _Upload plugin zip_ to install the downloaded plugin file.
 
 * Run a build that uses Gradle 3.5 or later.
 
+The plugin applies version 0.9 of the {uri-gradle-hazelcast-plugin}[Gradle Hazelcast] plugin when Gradle 3.5 is used
+and applies version 0.11 when Gradle 4.0 milestone 2 and later are used.
+The version of the plugin can be overridden by setting the Java system property `teamcity.build.cache.plugin.version`
+with the version to use.
+
 If successful the build log should contain lines similar to the following:
 
 ----
