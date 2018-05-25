@@ -5,6 +5,8 @@ import jetbrains.buildServer.configs.kotlin.v2017_2.CheckoutMode
 import jetbrains.buildServer.configs.kotlin.v2017_2.Template
 import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.v2017_2.project
+import jetbrains.buildServer.configs.kotlin.v2017_2.projectFeatures.VersionedSettings
+import jetbrains.buildServer.configs.kotlin.v2017_2.projectFeatures.versionedSettings
 import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2017_2.vcs.GitVcsRoot
 import jetbrains.buildServer.configs.kotlin.v2017_2.version
@@ -16,14 +18,26 @@ project {
     parentId = "TeamCityPlugins"
     name = "Gradle Build Cache"
 
+    val vcsId = "TeamCityPlugins_GradleBuildCache_GradleBuildCache"
     val vcsRoot = GitVcsRoot({
         uuid = "81b63059-b4bd-4714-b9a7-5c169039423a"
-        id = "TeamCityPlugins_GradleBuildCache_GradleBuildCache"
+        id = vcsId
         name = "gradle-build-cache"
         url = "https://github.com/rodm/teamcity-gradle-build-cache-plugin.git"
         useMirrors = false
     })
     vcsRoot(vcsRoot)
+
+    features {
+        versionedSettings {
+            id = "PROJECT_EXT_8"
+            mode = VersionedSettings.Mode.ENABLED
+            rootExtId = vcsId
+            showChanges = true
+            settingsFormat = VersionedSettings.Format.KOTLIN
+            buildSettingsMode = VersionedSettings.BuildSettingsMode.PREFER_SETTINGS_FROM_VCS
+        }
+    }
 
     val buildTemplate = Template({
         uuid = "1a61b842-422b-4f54-9f7e-435d0b646b36"
