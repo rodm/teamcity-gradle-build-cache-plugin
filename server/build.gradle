@@ -37,6 +37,11 @@ teamcity {
             downloadUrl = 'https://github.com/rodm/teamcity-gradle-build-cache-plugin'
             useSeparateClassloader = true
         }
+
+        publish {
+            username = findProperty('jetbrains.username')
+            password = findProperty('jetbrains.password')
+        }
     }
 
     environments {
