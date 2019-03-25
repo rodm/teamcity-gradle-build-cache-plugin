@@ -3,6 +3,7 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'org.gradle.jacoco'
 apply plugin: 'com.github.rodm.teamcity-server'
+apply plugin: 'com.github.rodm.teamcity-environments'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -49,11 +50,16 @@ teamcity {
         baseHomeDir = project.serversDir
         baseDataDir = "${rootDir}/data"
 
-        teamcity10 {
-            version = '10.0.5'
+        'teamcity2018.1' {
+            version = '2018.1.4'
             javaHome = file(java8Home)
             serverOptions '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
             agentOptions '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006'
+        }
+
+        'teamcity2018.2' {
+            version = '2018.2.3'
+            javaHome = file(java8Home)
         }
     }
 }
