@@ -13,15 +13,15 @@ version = "2018.2"
 project {
 
     val vcsId = "GradleBuildCache"
-    val vcsRoot = GitVcsRoot({
+    val vcsRoot = GitVcsRoot {
         id(vcsId)
         name = "gradle-build-cache"
         url = "https://github.com/rodm/teamcity-gradle-build-cache-plugin.git"
         useMirrors = false
-    })
+    }
     vcsRoot(vcsRoot)
 
-    val buildTemplate = Template({
+    val buildTemplate = Template {
         id("Build")
         name = "build"
 
@@ -60,17 +60,17 @@ project {
             param("gradle.opts", "")
             param("gradle.tasks", "clean build")
         }
-    })
+    }
     template(buildTemplate)
 
-    val build = BuildType({
+    val build = BuildType {
         templates(buildTemplate)
         id("BuildTeamCity100")
         name = "Build - TeamCity 10.0"
-    })
+    }
     buildType(build)
 
-    val reportCodeQuality = BuildType({
+    val reportCodeQuality = BuildType {
         templates(buildTemplate)
         id("ReportCodeQuality")
         name = "Report - Code Quality"
@@ -79,6 +79,6 @@ project {
             param("gradle.opts", "%sonar.opts%")
             param("gradle.tasks", "clean build sonarqube")
         }
-    })
+    }
     buildType(reportCodeQuality)
 }
