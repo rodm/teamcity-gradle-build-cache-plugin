@@ -1,4 +1,5 @@
 
+import org.gradle.util.GradleVersion
 import org.gradle.api.internal.tasks.TaskExecutionOutcome
 import org.gradle.api.internal.tasks.TaskStateInternal
 
@@ -44,21 +45,23 @@ initscript {
     if (ext.hazelcastPluginVersion == null) {
         ext.hazelcastPluginVersion = GradleVersion.current() >= GradleVersion.version('4.0-milestone-2') ? '0.11' : '0.9'
     }
-    logger.info("Applying Hazelcast plugin version: ${hazelcastPluginVersion}")
+    if (GradleVersion.current() >= GradleVersion.version('3.5')) {
+        logger.info("Applying Hazelcast plugin version: ${hazelcastPluginVersion}")
 
-    repositories {
-        maven {
-            url 'https://repo.gradle.org/gradle/libs/'
+        repositories {
+            maven {
+                url 'https://repo.gradle.org/gradle/libs/'
+            }
+            mavenCentral()
         }
-        mavenCentral()
-    }
 
-    dependencies {
-        classpath "org.gradle.caching.hazelcast:gradle-hazelcast-plugin:${hazelcastPluginVersion}"
+        dependencies {
+            classpath "org.gradle.caching.hazelcast:gradle-hazelcast-plugin:${hazelcastPluginVersion}"
+        }
     }
 }
 
-if (GradleVersion.current() >= GradleVersion.version("3.5")) {
+if (GradleVersion.current() >= GradleVersion.version('3.5')) {
     gradle.addListener(new TaskExecutionStatisticsPublisher(logger))
     gradle.settingsEvaluated { settings ->
         def pluginClass = Class.forName('org.gradle.caching.hazelcast.HazelcastPlugin')
