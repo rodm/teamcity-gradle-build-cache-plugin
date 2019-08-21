@@ -8,10 +8,6 @@ apply plugin: 'com.github.rodm.teamcity-environments'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-configurations {
-    all*.exclude module: 'xom'
-}
-
 dependencies {
     compile project(':common')
     compile group: 'com.hazelcast', name: 'hazelcast', version: '3.8'
@@ -51,14 +47,14 @@ teamcity {
         baseDataDir = "${rootDir}/data"
 
         'teamcity2018.1' {
-            version = '2018.1.4'
+            version = '2018.1.5'
             javaHome = file(java8Home)
             serverOptions '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
             agentOptions '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006'
         }
 
         'teamcity2018.2' {
-            version = '2018.2.3'
+            version = '2018.2.4'
             javaHome = file(java8Home)
         }
     }

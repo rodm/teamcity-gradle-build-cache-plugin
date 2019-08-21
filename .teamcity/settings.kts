@@ -1,5 +1,4 @@
 
-import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2018_2.CheckoutMode
 import jetbrains.buildServer.configs.kotlin.v2018_2.Template
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.gradle
@@ -9,7 +8,7 @@ import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.VcsTrigger.QuietPer
 import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
 import jetbrains.buildServer.configs.kotlin.v2018_2.version
 
-version = "2018.2"
+version = "2019.1"
 
 project {
 
@@ -65,14 +64,33 @@ project {
     }
     template(buildTemplate)
 
-    val build = BuildType {
+    val build1 = buildType {
         templates(buildTemplate)
         id("BuildTeamCity100")
-        name = "Build - TeamCity 10.0"
+        name = "Build - TeamCity 2018.1"
     }
-    buildType(build)
 
-    val reportCodeQuality = BuildType {
+    val build2 = buildType {
+        templates(buildTemplate)
+        id("Build2")
+        name = "Build - TeamCity 2018.2"
+
+        params {
+            param("gradle.opts", "-Pteamcity.api.version=2018.2")
+        }
+    }
+
+    val build3 = buildType {
+        templates(buildTemplate)
+        id("Build3")
+        name = "Build - TeamCity 2019.1"
+
+        params {
+            param("gradle.opts", "-Pteamcity.api.version=2019.1")
+        }
+    }
+
+    val reportCodeQuality = buildType {
         templates(buildTemplate)
         id("ReportCodeQuality")
         name = "Report - Code Quality"
@@ -82,5 +100,6 @@ project {
             param("gradle.tasks", "clean build sonarqube")
         }
     }
-    buildType(reportCodeQuality)
+
+    buildTypesOrder = arrayListOf(build1, build2, build3, reportCodeQuality)
 }
