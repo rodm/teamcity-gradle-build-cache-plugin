@@ -9,14 +9,14 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile project(':common')
-    compile group: 'com.hazelcast', name: 'hazelcast', version: '3.8'
+    implementation project(':common')
+    implementation group: 'com.hazelcast', name: 'hazelcast', version: '3.8'
 
     agent (project(path: ':agent', configuration: 'plugin'))
 
-    testCompile localGroovy()
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
+    testImplementation localGroovy()
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
 }
 
 teamcity {
@@ -36,8 +36,7 @@ teamcity {
         }
 
         publish {
-            username = findProperty('jetbrains.username')
-            password = findProperty('jetbrains.password')
+            token = findProperty('jetbrains.token')
         }
     }
 
