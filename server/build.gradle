@@ -19,6 +19,16 @@ dependencies {
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
 }
 
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+    }
+}
+
 teamcity {
     server {
         archiveName = "gradle-build-cache-${rootProject.version}.zip"
