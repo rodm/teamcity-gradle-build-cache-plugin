@@ -32,9 +32,6 @@ public class BuildCacheServer {
 
     private HazelcastInstance hazelcastInstance;
 
-    public BuildCacheServer() {
-    }
-
     void start() {
         LOGGER.info(getClass().getSimpleName() + " started");
         java.util.logging.Logger.getLogger("com.hazelcast").setLevel(Level.WARNING);

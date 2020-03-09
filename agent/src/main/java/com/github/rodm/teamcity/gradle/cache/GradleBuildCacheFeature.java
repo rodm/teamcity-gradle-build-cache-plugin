@@ -34,7 +34,7 @@ import static jetbrains.buildServer.log.Loggers.AGENT_CATEGORY;
 
 public class GradleBuildCacheFeature extends AgentLifeCycleAdapter {
 
-    private static Logger LOG = Logger.getLogger(AGENT_CATEGORY + ".GradleBuildCache");
+    private static final Logger LOG = Logger.getLogger(AGENT_CATEGORY + ".GradleBuildCache");
 
     private static final String GRADLE_CMD_PARAMS = "ui.gradleRunner.additional.gradle.cmd.params";
 

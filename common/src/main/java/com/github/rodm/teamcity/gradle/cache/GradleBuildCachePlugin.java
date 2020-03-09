@@ -18,7 +18,9 @@ package com.github.rodm.teamcity.gradle.cache;
 
 public class GradleBuildCachePlugin {
 
-    public static String PLUGIN_NAME = "gradleBuildCache";
+    public static final String PLUGIN_NAME = "gradleBuildCache";
 
-    public static String FEATURE_TYPE = "gradle-build-cache";
+    public static final String FEATURE_TYPE = "gradle-build-cache";
+
+    private GradleBuildCachePlugin() {}
 }

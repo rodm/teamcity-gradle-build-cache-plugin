@@ -83,7 +83,8 @@ public class GradleTasksValueType extends CompositeVTB {
                 return new SimpleBuildMetricVT(myServer, myStorage, myValueProviderRegistry, subKey, "Skipped tasks");
             case "GradleTasksUpToDate":
                 return new SimpleBuildMetricVT(myServer, myStorage, myValueProviderRegistry, subKey, "Up to date tasks");
+            default:
+                return super.createValueProviderForSubkey(subKey);
         }
-        return super.createValueProviderForSubkey(subKey);
     }
 }
