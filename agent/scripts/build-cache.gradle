@@ -68,7 +68,7 @@ if (GradleVersion.current() >= GradleVersion.version('3.5')) {
         def cacheClass = Class.forName('org.gradle.caching.hazelcast.HazelcastBuildCache')
         settings.apply(plugin: pluginClass)
         settings.buildCache {
-            local(cacheClass) {
+            remote(cacheClass) {
                 push = true
             }
         }

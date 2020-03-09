@@ -57,8 +57,15 @@ class BuildCacheInitScriptTest {
     }
 
     @Test
-    void 'applying build cache script with Gradle 5.3 applies Hazelcast plugin'() {
-        BuildResult result = executeBuild('5.3.1')
+    void 'applying build cache script with Gradle 5.x applies Hazelcast plugin'() {
+        BuildResult result = executeBuild('5.6.4')
+
+        assertThat(result.getOutput(), containsString('Applying Hazelcast plugin version'))
+    }
+
+    @Test
+    void 'applying build cache script with Gradle 6.x applies Hazelcast plugin'() {
+        BuildResult result = executeBuild('6.2.2')
 
         assertThat(result.getOutput(), containsString('Applying Hazelcast plugin version'))
     }
