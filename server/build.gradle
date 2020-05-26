@@ -1,12 +1,11 @@
 
-apply plugin: 'java'
-apply plugin: 'groovy'
-apply plugin: 'org.gradle.jacoco'
-apply plugin: 'com.github.rodm.teamcity-server'
-apply plugin: 'com.github.rodm.teamcity-environments'
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+plugins {
+    id 'org.gradle.java'
+    id 'org.gradle.groovy'
+    id 'org.gradle.jacoco'
+    id 'com.github.rodm.teamcity-server'
+    id 'com.github.rodm.teamcity-environments'
+}
 
 dependencies {
     implementation project(':common')
@@ -15,8 +14,13 @@ dependencies {
     agent (project(path: ':agent', configuration: 'plugin'))
 
     testImplementation localGroovy()
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
+    testImplementation group: 'junit', name: 'junit', version: '4.13'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.3.3'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 test {
