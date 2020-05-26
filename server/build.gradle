@@ -51,6 +51,7 @@ teamcity {
 
         publish {
             token = findProperty('jetbrains.token')
+            notes = 'Update to support Gradle 6.x'
         }
     }
 
