@@ -4,6 +4,7 @@
 :uri-gradle-build-cache: {uri-gradle-docs}/build_cache.html[Gradle Build Cache]
 :uri-gradle-hazelcast-plugin: https://github.com/gradle/gradle-hazelcast-plugin
 :uri-download: https://bintray.com/rodm/teamcity-plugins-generic/gradle-build-cache
+:uri-apache-license: https://www.apache.org/licenses/LICENSE-2.0.html[Apache License, Version 2.0]
 
 Gradle Build Cache is a {uri-teamcity} plugin that provides a build feature to enable the {uri-gradle-build-cache}.
 The plugin applies the {uri-gradle-hazelcast-plugin}[Gradle Hazelcast] settings plugin to enable build caching
@@ -12,7 +13,7 @@ and starts a Hazelcast node on the TeamCity Server.
 image:https://travis-ci.org/rodm/teamcity-gradle-build-cache-plugin.svg?branch=master["Build Status", link="https://travis-ci.org/rodm/teamcity-gradle-build-cache-plugin"]
 image:https://api.bintray.com/packages/rodm/teamcity-plugins-generic/gradle-build-cache/images/download.svg[link="https://bintray.com/rodm/teamcity-plugins-generic/gradle-build-cache/_latestVersion"]
 
-## Features
+== Features
 
 * Configures the TeamCity Server to run as a Build Cache host using Hazelcast
 
@@ -20,7 +21,7 @@ image:https://api.bintray.com/packages/rodm/teamcity-plugins-generic/gradle-buil
 
 * Collects Gradle task outcomes and provides a graph on the statistics page
 
-## Installation
+== Installation
 
 * Download the plugin file from {uri-download} (see _Downloads_ section at the bottom of the page).
 
@@ -29,7 +30,7 @@ click on the link _Upload plugin zip_ to install the downloaded plugin file.
 
 * Restart TeamCity.
 
-## Using the plugin
+== Using the plugin
 
 * Edit a build configuration and add the Build Feature, Gradle Build Cache.
 
@@ -62,10 +63,10 @@ If successful the build log should contain lines similar to the following:
 [12:51:46][Step 1/1] Process exited with code 0
 ----
 
-## Compatibility
+== Compatibility
 
-The plugin is compatible with TeamCity 10.0 and later.
+The plugin is compatible with TeamCity 2018.1 and later.
 
-## License
+== License
 
-This plugin is available under the http://www.apache.org/licenses/LICENSE-2.0.html[Apache License, Version 2.0].
+This plugin is available under the {uri-apache-license}.

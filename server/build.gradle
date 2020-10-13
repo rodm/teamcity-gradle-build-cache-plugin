@@ -47,6 +47,7 @@ teamcity {
             email = 'rod.n.mackenzie@gmail.com'
             downloadUrl = 'https://github.com/rodm/teamcity-gradle-build-cache-plugin'
             useSeparateClassloader = true
+            minimumBuild = '58245'
         }
 
         publish {
