@@ -27,7 +27,6 @@ project {
 
         vcs {
             root(vcsRoot)
-            checkoutMode = CheckoutMode.ON_SERVER
         }
 
         steps {
