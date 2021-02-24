@@ -1,5 +1,4 @@
 
-import jetbrains.buildServer.configs.kotlin.v2019_2.CheckoutMode
 import jetbrains.buildServer.configs.kotlin.v2019_2.Template
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.v2019_2.project
@@ -46,6 +45,10 @@ project {
                 id = "vcsTrigger"
                 quietPeriodMode = USE_DEFAULT
                 branchFilter = ""
+                triggerRules = """
+                    -:.github/**
+                    -:README.adoc
+                """.trimIndent()
             }
         }
 
