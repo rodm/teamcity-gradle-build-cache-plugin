@@ -3,15 +3,16 @@
 :uri-gradle-docs: https://docs.gradle.org/current/userguide
 :uri-gradle-build-cache: {uri-gradle-docs}/build_cache.html[Gradle Build Cache]
 :uri-gradle-hazelcast-plugin: https://github.com/gradle/gradle-hazelcast-plugin
-:uri-download: https://bintray.com/rodm/teamcity-plugins-generic/gradle-build-cache
 :uri-apache-license: https://www.apache.org/licenses/LICENSE-2.0.html[Apache License, Version 2.0]
+:uri-github-project: https://github.com/rodm/teamcity-gradle-build-cache-plugin/
+:uri-github-actions: {uri-github-project}/actions
+:uri-github-status: {uri-github-project}/workflows/Build/badge.svg
 
 Gradle Build Cache is a {uri-teamcity} plugin that provides a build feature to enable the {uri-gradle-build-cache}.
 The plugin applies the {uri-gradle-hazelcast-plugin}[Gradle Hazelcast] settings plugin to enable build caching
 and starts a Hazelcast node on the TeamCity Server.
 
-image:https://travis-ci.org/rodm/teamcity-gradle-build-cache-plugin.svg?branch=master["Build Status", link="https://travis-ci.org/rodm/teamcity-gradle-build-cache-plugin"]
-image:https://api.bintray.com/packages/rodm/teamcity-plugins-generic/gradle-build-cache/images/download.svg[link="https://bintray.com/rodm/teamcity-plugins-generic/gradle-build-cache/_latestVersion"]
+image:{uri-github-status}?branch=master["Build Status", link="{uri-github-actions}"]
 
 == Features
 
