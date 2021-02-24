@@ -35,21 +35,21 @@ class BuildCacheInitScriptTest {
     public final TemporaryFolder projectDir = new TemporaryFolder()
 
     @Test
-    void 'applying build cache script with Gradle 4.0 applies Hazelcast plugin v0.11'() {
+    void 'applying build cache script with Gradle 4_0 applies Hazelcast plugin v0_11'() {
         BuildResult result = executeBuild('4.0.2')
 
         assertThat(result.getOutput(), containsString('Applying Hazelcast plugin version: 0.11'))
     }
 
     @Test
-    void 'applying build cache script with Gradle 3.5 applies Hazelcast plugin v0.9'() {
+    void 'applying build cache script with Gradle 3_5 applies Hazelcast plugin v0_9'() {
         BuildResult result = executeBuild('3.5.1')
 
         assertThat(result.getOutput(), containsString('Applying Hazelcast plugin version: 0.9'))
     }
 
     @Test
-    void 'applying build cache script with Gradle 3.4 does not apply Hazelcast plugin'() {
+    void 'applying build cache script with Gradle 3_4 does not apply Hazelcast plugin'() {
         BuildResult result = executeBuild('3.4.1')
 
         assertThat(result.getOutput(), not(containsString('Applying Hazelcast plugin version:')))
@@ -57,14 +57,14 @@ class BuildCacheInitScriptTest {
     }
 
     @Test
-    void 'applying build cache script with Gradle 5.x applies Hazelcast plugin'() {
+    void 'applying build cache script with Gradle 5_x applies Hazelcast plugin'() {
         BuildResult result = executeBuild('5.6.4')
 
         assertThat(result.getOutput(), containsString('Applying Hazelcast plugin version'))
     }
 
     @Test
-    void 'applying build cache script with Gradle 6.x applies Hazelcast plugin'() {
+    void 'applying build cache script with Gradle 6_x applies Hazelcast plugin'() {
         BuildResult result = executeBuild('6.2.2')
 
         assertThat(result.getOutput(), containsString('Applying Hazelcast plugin version'))

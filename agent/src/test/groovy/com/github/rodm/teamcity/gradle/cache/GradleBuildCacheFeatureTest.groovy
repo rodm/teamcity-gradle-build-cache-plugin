@@ -60,7 +60,7 @@ class GradleBuildCacheFeatureTest {
         feature = new GradleBuildCacheFeature(descriptor, eventDispatcher) {
             @Override
             boolean hasGradleBuildCacheFeature(BuildRunnerContext context) {
-                return hasGradleBuildCacheFeature;
+                return hasGradleBuildCacheFeature
             }
         }
     }
